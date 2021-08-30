@@ -13,7 +13,7 @@
       {% if traits %}
     	People who exhibit traits such as {% for trait in traits %}{{trait}}, {% endfor %} are classified under the "<b>{{personality}}</b>" types of personality.
       {% else %}
-      {{ name }} exhibits traits that can be classified under the <b>{{personality}}</b> type of personality
+      {{ name }} exhibits traits that can be classified under the <b>{{personality}}</b> type of personality ({{accuracy}})
       {% endif %}
   	</p>
     <button class="btn btn-primary btn-lg persona-btn" type="button">View</button>

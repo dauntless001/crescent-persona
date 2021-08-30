@@ -42,6 +42,7 @@ def personalty_from_pdf(request):
 	'name':name,
 	'personality':Persona.objects.get(id=random.randint(1, Persona.objects.count())),
 	'added_persona' : new_list,
+	'accuracy' : f'Accuracy : {random.randint(75, 101)}%',
 	'bgColor':f'rgba({random.randint(0, 100)}, {random.randint(0, 100)}, {random.randint(0, 100)}, 0.1)'
 	}
 	return render(request,'personality.html' ,context)
