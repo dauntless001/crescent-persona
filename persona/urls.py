@@ -19,7 +19,7 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('', include('base.urls')),
+    path('', include('base.urls', namespace='base')),
     path('personality/', include('personality.urls', namespace='personality')),
     path('admin/', admin.site.urls),
 ]
