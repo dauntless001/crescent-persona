@@ -10,6 +10,7 @@
       <p class=" mb-4 text-uppercase"> <b class="fw-bolder">Department of Computer Science, Crescent University Abeokuta, Ogun State</b></p>
     </div>
   </div>
+ {% if request.user.is_authenticated %}
  <div style="background: #eee;">
  	<div class="container p-5">
  		<ul class="nav nav-tabs justify-content-center nav-fill lead" id="myTab" role="tablist">
@@ -69,4 +70,10 @@
 		</div>
  	</div>
  </div>
+{% else %}
+<div class="text-center">
+	<h3>Administrator Login</h3>
+	<a href="{% url 'admin:index' %}" class="btn btn-primary">Login Here</a>
+</div>
+{% endif %}
 {% endblock content %}

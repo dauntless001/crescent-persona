@@ -12,12 +12,12 @@ DEBUG = True
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES['default'] = {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'persona.db',
-#         }
+DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'persona.db',
+        }
 
-DATABASES['default'] = dj_database_url.parse(url=os.getenv('DATABASE_URL'), conn_max_age=600)
+# DATABASES['default'] = dj_database_url.parse(url=os.getenv('DATABASE_URL'), conn_max_age=600)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
