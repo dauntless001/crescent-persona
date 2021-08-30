@@ -20,7 +20,7 @@ personality = {
 def personalty_from_pdf(request):
 	name = ''
 	cv = ''
-	personalities = [a.name for a in PersonaTrait.objects.all()]
+	personalities = [a.name for a in Persona.objects.all()]
 	if request.method == 'POST':
 		cv = CVForm(request.POST, request.FILES)
 		if cv.is_valid():
@@ -29,10 +29,19 @@ def personalty_from_pdf(request):
 			pdf = PdfFileReader(cv)
 			page = pdf.getPage(0)
 			page_content = page.extractText()
-			print(page_content.encode('utf-8'), 'pages')
+			# print(page_content.encode('utf-8'), 'pages')
+	'''yea'''
+	gen_num = random.randint(0, 3)
+	new_list = []
+	if gen_num > 0:
+		for a in range(gen_num):
+			ran =  personalities[random.randint(0, len(personalities)-1)]
+			if ran not in new_list:
+				new_list.append(ran)
 	context = {
 	'name':name,
 	'personality':Persona.objects.get(id=random.randint(1, Persona.objects.count())),
+	'added_persona' : new_list,
 	'bgColor':f'rgba({random.randint(0, 100)}, {random.randint(0, 100)}, {random.randint(0, 100)}, 0.1)'
 	}
 	return render(request,'personality.html' ,context)
@@ -51,17 +60,6 @@ def personality_answers(request):
 		for a in personality_ids:
 			if categories.count(a) >= max_cat:
 				max_cat = a
-		# a, b, c, d, e = categories.count(), categories.count(1), categories.count(2), categories.count(3), categories.count(4)
-		# print(a, b, c, d)
-		# if (a >= b) and (a >= c) and (a >= d) and (a >=e):
-		# 	persona = 0
-		# elif (b >= a)  and (b >= c) and (b >= d):
-		# 	persona = 1
-		# elif (c >= a) and (c >= b) and (c >= d):
-		# 	persona = 2
-		# else:
-		# 	persona = 3
-		# traits_list = [a.split('$')[1] for a in traits]
 		context = {
 		'name' : name,
 		'personality' : Persona.objects.get(id=max_cat),

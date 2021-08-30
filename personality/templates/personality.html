@@ -17,6 +17,15 @@
       {% endif %}
   	</p>
     <button class="btn btn-primary btn-lg persona-btn" type="button">View</button>
+    {% if added_persona %}
+    <button class="btn btn-dark btn-lg other-btn" type="button">Other Personalities</button>
+    {% endif %}
+    <p class="col-12 fs-4 my-2 other-persona" style="display:none">
+      Other Personalities are: 
+      {% for persona in added_persona %}
+      {{ persona }},
+      {% endfor %}
+    </p>
   </div>
 </div>
 <div class="card m-5 desc p-2" style="text-align: justify;">
@@ -27,12 +36,18 @@
 <script type="text/javascript">
   let desc = document.querySelector('.desc')
   let showBtn  = document.querySelector('.persona-btn')
+  let otherBtn  = document.querySelector('.other-btn')
+  let otherPersona  = document.querySelector('.other-persona')
   let show = document.querySelector('.show')
   window.addEventListener('load', () => {
   desc.style.display = 'none';
   })
   showBtn.addEventListener('click', () => {
     desc.style.display = 'block'
+    // desc.classList.toggle('show');
+  })
+  otherBtn.addEventListener('click', () => {
+    otherPersona.style.display = 'block'
     // desc.classList.toggle('show');
   })
 </script>
