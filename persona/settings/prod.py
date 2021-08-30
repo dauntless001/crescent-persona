@@ -1,5 +1,5 @@
-from faceApp.settings.packages.aws import *
-from faceApp.settings.base import *
+from persona.settings.packages.aws import *
+from persona.settings.base import *
 import os, dj_database_url
 
 
