@@ -32,7 +32,7 @@ def personalty_from_pdf(request):
 			print(page_content.encode('utf-8'), 'pages')
 	context = {
 	'name':name,
-	'personality':Persona.objects.get(id=random.randint(0, 4)),
+	'personality':Persona.objects.get(id=random.randint(1, 5)),
 	'bgColor':f'rgba({random.randint(0, 100)}, {random.randint(0, 100)}, {random.randint(0, 100)}, 0.1)'
 	}
 	return render(request,'personality.html' ,context)
