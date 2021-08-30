@@ -1,0 +1,39 @@
+{% extends 'partials/_layout.html' %}
+<style type="text/css">
+  .show{
+    display: block;
+  }
+</style>
+
+{% block content %}
+<div class="p-5" style="background: {{bgColor}}">
+  <div class="container py-5 text-center">
+    <h1 class="display-5 fw-bold">{{name}}</h1>
+    <p class="col-12 fs-4">
+      {% if traits %}
+    	People who exhibit traits such as {% for trait in traits %}{{trait}}, {% endfor %} are classified under the "<b>{{personality}}</b>" types of personality.
+      {% else %}
+      {{ name }} exhibits traits that can be classified under the <b>{{personality}}</b> type of personality
+      {% endif %}
+  	</p>
+    <button class="btn btn-primary btn-lg persona-btn" type="button">View</button>
+  </div>
+</div>
+<div class="card m-5 desc p-2" style="text-align: justify;">
+  <p>{{personality.description}}</p>
+</div>
+
+
+<script type="text/javascript">
+  let desc = document.querySelector('.desc')
+  let showBtn  = document.querySelector('.persona-btn')
+  let show = document.querySelector('.show')
+  window.addEventListener('load', () => {
+  desc.style.display = 'none';
+  })
+  showBtn.addEventListener('click', () => {
+    desc.style.display = 'block'
+    // desc.classList.toggle('show');
+  })
+</script>
+{% endblock content %}

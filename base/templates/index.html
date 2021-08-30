@@ -1,0 +1,72 @@
+{% extends 'partials/_layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="px-4 py-5 my-3 text-center">
+    <img class="d-block mx-auto" src="{% static 'images/images.jpeg' %}" alt="" width="150" height="auto">
+    <h1 class="display-5 fw-bold text-uppercase">Personality Prediction System using CV Analysis</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-2 text-uppercase">By <b class="fw-bolder">Adedayo Aderonke Oyedola (S219202020)</b></p>
+      <p class=" mb-4 text-uppercase"> <b class="fw-bolder">Department of Computer Science, Crescent University Abeokuta, Ogun State</b></p>
+    </div>
+  </div>
+ <div style="background: #eee;">
+ 	<div class="container p-5">
+ 		<ul class="nav nav-tabs justify-content-center nav-fill lead" id="myTab" role="tablist">
+		  <li class="nav-item" role="presentation">
+		    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Upload a CV</button>
+		  </li>
+		  <li class="nav-item" role="presentation">
+		    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Answer Questions</button>
+		  </li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+		  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+		  	<div class="p-3 lead">
+		  		<form method="POST" enctype="multipart/form-data" action="{% url 'personality:pdf' %}">
+		  			{% csrf_token %}
+		  			<div class="my-3">
+					  	<label>Name</label>
+					  	{{form.name}}
+		  				<!-- <input class="form-control form-control" type="text" name='name' placeholder="" aria-label=".form-control-lg example"> -->
+		  			
+					</div>
+		  			<div class="my-3">
+					  <label for="formFile" class="form-label">CV (in .pdf or .doc format)</label>
+					  {{form.cv}}
+					  <!-- <input class="form-control" type="file" id="formFile" accept=".pdf" name='cv_doc'> -->
+					</div>
+					<div class="my-2">
+							<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+		  		</form>
+		  	</div>
+
+		  </div>
+		  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+		  	<div class="p-3">
+		  		<p>Select the following characteristics your exhibit</p>
+		  		<form method='POST' action="{% url 'personality:personality_answers' %}">
+		  			{% csrf_token %}
+		  			<div class="my-3">
+					  	<label>Name</label>
+		  				<input class="form-control form-control" type="text" placeholder="" name="name">
+						</div>
+		  			{% for trait in traits %}
+			  		<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="traits" value="{{trait.persona.id}}${{trait.name}}">
+						  <label class="form-check-label" for="inlineCheckbox1">{{trait.name}}</label>
+						</div>
+						{% endfor %}
+						<div class="my-2">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+		  		</form>
+		  		
+		  		
+		  	</div>
+		  </div>
+		</div>
+ 	</div>
+ </div>
+{% endblock content %}
