@@ -15,7 +15,7 @@
       {{ name }} exhibits traits that can be classified under the <b>{{personality}}</b> type of personality ({{accuracy}})
       {% endif %}
   	</p>
-    <button class="btn btn-primary btn-lg persona-btn" type="button" data-content='{{personality.description|linebreaksbr}}'>View</button>
+    <button class="btn btn-primary btn-lg persona-btn" type="button" data-content='{{personality.description}}'>View</button>
     {% if added_persona %}
     <button class="btn btn-dark btn-lg other-btn" type="button">Other Personalities</button>
     {% endif %}
@@ -23,7 +23,7 @@
     <p class="col-12 fs-4 my-2 other-persona" style="display:none">
       Other Personalities are: 
       {% for persona in added_persona %}
-      <span class="other-persona-btn" data-content="{{persona.description|linebreaksbr}}">{{ persona }},</span>
+      <span class="other-persona-btn" data-content="{{persona.description}}">{{ persona }},</span>
       {% endfor %}
     </p>
   </div>
