@@ -20,7 +20,6 @@ personality = {
 def personalty_from_pdf(request):
 	name = ''
 	cv = ''
-	personalities = [a.name for a in Persona.objects.all()]
 	if request.method == 'POST':
 		cv = CVForm(request.POST, request.FILES)
 		if cv.is_valid():
@@ -33,16 +32,20 @@ def personalty_from_pdf(request):
 	'''yea'''
 	gen_num = random.randint(0, 3)
 	new_list = []
+	persona = Persona.objects.get(id=random.randint(1, Persona.objects.count()))
 	if gen_num > 0:
 		for a in range(gen_num):
-			ran =  personalities[random.randint(0, len(personalities)-1)]
+			ran = Persona.objects.get(id=random.randint(1, Persona.objects.count()))
 			if ran not in new_list:
 				new_list.append(ran)
+	for a in new_list:
+		if a.name == persona.name:
+			new_list.remove(a)
 	context = {
 	'name':name,
-	'personality':Persona.objects.get(id=random.randint(1, Persona.objects.count())),
+	'personality':persona,
 	'added_persona' : new_list,
-	'accuracy' : f'Accuracy : {random.randint(75, 101)}%',
+	'accuracy' : f'Accuracy : {random.randint(75, 100)}%',
 	'bgColor':f'rgba({random.randint(0, 100)}, {random.randint(0, 100)}, {random.randint(0, 100)}, 0.1)'
 	}
 	return render(request,'personality.html' ,context)

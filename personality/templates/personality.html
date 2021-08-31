@@ -1,11 +1,10 @@
 {% extends 'partials/_layout.html' %}
+{% block content %}
 <style type="text/css">
   .show{
-    display: block;
+    display: block !important;
   }
 </style>
-
-{% block content %}
 <div class="p-5" style="background: {{bgColor}}">
   <div class="container py-5 text-center">
     <h1 class="display-5 fw-bold">{{name}}</h1>
@@ -16,20 +15,21 @@
       {{ name }} exhibits traits that can be classified under the <b>{{personality}}</b> type of personality ({{accuracy}})
       {% endif %}
   	</p>
-    <button class="btn btn-primary btn-lg persona-btn" type="button">View</button>
+    <button class="btn btn-primary btn-lg persona-btn" type="button" data-content='{{personality.description}}'>View</button>
     {% if added_persona %}
     <button class="btn btn-dark btn-lg other-btn" type="button">Other Personalities</button>
     {% endif %}
+
     <p class="col-12 fs-4 my-2 other-persona" style="display:none">
       Other Personalities are: 
       {% for persona in added_persona %}
-      {{ persona }},
+      <span class="other-persona-btn" data-content="{{persona.description}}">{{ persona }},</span>
       {% endfor %}
     </p>
   </div>
 </div>
 <div class="card m-5 desc p-2" style="text-align: justify;">
-  <p>{{personality.description | linebreaks}}</p>
+  <p class="personality-text"></p>
 </div>
 
 
@@ -38,17 +38,26 @@
   let showBtn  = document.querySelector('.persona-btn')
   let otherBtn  = document.querySelector('.other-btn')
   let otherPersona  = document.querySelector('.other-persona')
-  let show = document.querySelector('.show')
+  let otherPersonaBtns = document.querySelectorAll('.other-persona-btn')
   window.addEventListener('load', () => {
   desc.style.display = 'none';
   })
-  showBtn.addEventListener('click', () => {
-    desc.style.display = 'block'
-    // desc.classList.toggle('show');
-  })
+  showBtn.addEventListener('click', e => {
+    desc.classList.toggle('show');
+    const {content} = e.currentTarget.dataset
+    desc.firstChild.textContent = content
+      })
   otherBtn.addEventListener('click', () => {
     otherPersona.style.display = 'block'
     // desc.classList.toggle('show');
   })
+  otherPersonaBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const {content} = e.currentTarget.dataset
+      desc.classList.toggle('show');
+      desc.firstChild.textContent = content
+    })
+  })
+
 </script>
 {% endblock content %}
