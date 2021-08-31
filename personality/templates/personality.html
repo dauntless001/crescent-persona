@@ -23,7 +23,7 @@
     <p class="col-12 fs-4 my-2 other-persona" style="display:none">
       Other Personalities are: 
       {% for persona in added_persona %}
-      <span class="other-persona-btn" data-content="{{persona.description}}">{{ persona }},</span>
+      <span class="other-persona-btn" data-content="{{persona.description|linebreaksbr}}">{{ persona }},</span>
       {% endfor %}
     </p>
   </div>
